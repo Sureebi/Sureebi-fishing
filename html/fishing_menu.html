@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing Menu</title>
+    <link rel="stylesheet" href="fishing_menu.css">
+</head>
+<body>
+    <div id="container" class="hidden">
+        <div class="menu">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="logo">🎣</div>
+                    <h1>РИБОЛОВ</h1>
+                </div>
+                
+                <div class="nav">
+                    <button class="nav-btn active" data-tab="dashboard">
+                        <span class="icon">📊</span>
+                        <span>Начало</span>
+                    </button>
+                    <button class="nav-btn" data-tab="shop">
+                        <span class="icon">🛒</span>
+                        <span>Магазин</span>
+                    </button>
+                    <button class="nav-btn" data-tab="sell">
+                        <span class="icon">💰</span>
+                        <span>Продажба</span>
+                    </button>
+                    <button class="nav-btn" data-tab="stats">
+                        <span class="icon">📈</span>
+                        <span>Статистики</span>
+                    </button>
+                    <button class="nav-btn" data-tab="leaderboard">
+                        <span class="icon">🏆</span>
+                        <span>Класации</span>
+                    </button>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="player-info">
+                        <div class="info-row">
+                            <span>Общо улови:</span>
+                            <span id="sidebarCatches">0</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Общо тегло:</span>
+                            <span id="sidebarWeight">0 кг</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main">
+                <div class="main-header">
+                    <h2 id="pageTitle">Начало</h2>
+                    <button class="close-btn" id="closeBtn">✕</button>
+                </div>
+
+                <div class="main-content">
+                    <!-- Dashboard -->
+                    <div id="tab-dashboard" class="tab-content active">
+                        <div class="stats-row">
+                            <div class="stat-card">
+                                <div class="stat-icon">🎣</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="totalCatches">0</div>
+                                    <div class="stat-label">Общо улови</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⚖️</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="totalWeight">0 кг</div>
+                                    <div class="stat-label">Общо тегло</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🐟</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="biggestFish">-</div>
+                                    <div class="stat-label">Най-голяма риба</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📏</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="longestFish">0 см</div>
+                                    <div class="stat-label">Най-дълга риба</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3>Последни улови</h3>
+                            <div id="recentList" class="recent-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Shop -->
+                    <div id="tab-shop" class="tab-content">
+                        <div id="shopGrid" class="item-grid"></div>
+                    </div>
+
+                    <!-- Sell -->
+                    <div id="tab-sell" class="tab-content">
+                        <div class="sell-grid">
+                            <button class="sell-card sell-card-all" onclick="sellFish('all')">
+                                <div class="sell-card-icon-bg">
+                                    <svg class="sell-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <div class="sell-card-title">Всички риби</div>
+                                <div class="sell-card-desc">Продай всички</div>
+                            </button>
+                            <button class="sell-card sell-card-river" onclick="sellFish('river')">
+                                <div class="sell-card-icon-bg">
+                                    <svg class="sell-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 12c3-2 6-2 9 0s6 2 9 0"/>
+                                        <path d="M3 16c3-2 6-2 9 0s6 2 9 0"/>
+                                        <path d="M3 8c3-2 6-2 9 0s6 2 9 0"/>
+                                    </svg>
+                                </div>
+                                <div class="sell-card-title">Речни риби</div>
+                                <div class="sell-card-desc">Само речни</div>
+                            </button>
+                            <button class="sell-card sell-card-lake" onclick="sellFish('lake')">
+                                <div class="sell-card-icon-bg">
+                                    <svg class="sell-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 18h18"/>
+                                        <path d="M4 14l4-8 4 8 4-8 4 8"/>
+                                    </svg>
+                                </div>
+                                <div class="sell-card-title">Езерни риби</div>
+                                <div class="sell-card-desc">Само езерни</div>
+                            </button>
+                            <button class="sell-card sell-card-sea" onclick="sellFish('sea')">
+                                <div class="sell-card-icon-bg">
+                                    <svg class="sell-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M2 12c0 0 3-4 6-4s4 4 6 4 3-4 6-4 4 4 4 4"/>
+                                        <path d="M2 16c0 0 3-4 6-4s4 4 6 4 3-4 6-4 4 4 4 4"/>
+                                    </svg>
+                                </div>
+                                <div class="sell-card-title">Морски риби</div>
+                                <div class="sell-card-desc">Само морски</div>
+                            </button>
+                            <button class="sell-card sell-card-ocean" onclick="sellFish('ocean')">
+                                <div class="sell-card-icon-bg">
+                                    <svg class="sell-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 2a10 10 0 0 0 0 20"/>
+                                        <path d="M2 12h20"/>
+                                    </svg>
+                                </div>
+                                <div class="sell-card-title">Океански риби</div>
+                                <div class="sell-card-desc">Само океански</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div id="tab-stats" class="tab-content">
+                        <div id="categoryStats" class="category-list"></div>
+                    </div>
+
+                    <!-- Leaderboard -->
+                    <div id="tab-leaderboard" class="tab-content">
+                        <div class="lb-tabs">
+                            <button class="lb-tab active" data-lb="total">Общо улови</button>
+                            <button class="lb-tab" data-lb="biggest">Най-големи риби</button>
+                            <button class="lb-tab" data-lb="records">Световни рекорди</button>
+                        </div>
+                        <div id="lbContent" class="lb-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy Modal -->
+        <div id="buy-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 id="modal-title">Покупка</h3>
+                <div class="modal-body">
+                    <div class="modal-item-info">
+                        <img id="modal-item-img" src="" class="modal-item-image">
+                        <div>
+                            <div id="modal-item-name" class="modal-item-name"></div>
+                            <div id="modal-item-price" class="modal-item-price"></div>
+                        </div>
+                    </div>
+                    <div class="modal-input-group">
+                        <label for="quantity-input">Количество:</label>
+                        <input type="number" id="quantity-input" min="1" max="100" value="1">
+                    </div>
+                    <div class="modal-total">
+                        <span>Обща цена:</span>
+                        <span id="modal-total-price">0 лв</span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-cancel" onclick="closeBuyModal()">Отказ</button>
+                    <button class="modal-btn modal-btn-confirm" onclick="confirmPurchase()">Купи</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="fishing_menu.js"></script>
+</body>
+</html>

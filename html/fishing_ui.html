@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing System</title>
+    <link rel="stylesheet" href="fishing_ui.css">
+</head>
+<body>
+    <div id="fishing-container" class="hidden">
+        <div class="fishing-panel">
+            <!-- Header -->
+            <div class="panel-header">
+                <h1>🎣 Риболовна Система</h1>
+                <button class="close-btn" onclick="closeUI()">✕</button>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="dashboard">📊 Начало</button>
+                <button class="tab-btn" data-tab="shop">🛒 Магазин</button>
+                <button class="tab-btn" data-tab="sell">💰 Продажба</button>
+                <button class="tab-btn" data-tab="stats">📈 Статистики</button>
+                <button class="tab-btn" data-tab="leaderboard">🏆 Класации</button>
+                <button class="tab-btn" data-tab="collection">🐟 Колекция</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Dashboard Tab -->
+                <div id="dashboard-tab" class="tab-pane active">
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🎣</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Общо Улови</div>
+                                <div class="stat-value" id="total-catches">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⚖️</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Общо Тегло</div>
+                                <div class="stat-value" id="total-weight">0 кг</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🐟</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Най-Голяма Риба</div>
+                                <div class="stat-value" id="biggest-fish">-</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📏</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Най-Дълга Риба</div>
+                                <div class="stat-value" id="longest-fish">0 см</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-catches">
+                        <h3>Последни Улови</h3>
+                        <div id="recent-catches-list"></div>
+                    </div>
+                </div>
+
+                <!-- Shop Tab -->
+                <div id="shop-tab" class="tab-pane">
+                    <div class="shop-grid" id="shop-items"></div>
+                </div>
+
+                <!-- Sell Tab -->
+                <div id="sell-tab" class="tab-pane">
+                    <div class="sell-options">
+                        <button class="sell-btn" onclick="sellFish('all')">
+                            <span class="btn-icon">💰</span>
+                            <span class="btn-text">Продай Всички Риби</span>
+                        </button>
+                        <button class="sell-btn" onclick="sellFish('river')">
+                            <span class="btn-icon">🏞️</span>
+                            <span class="btn-text">Продай Речни Риби</span>
+                        </button>
+                        <button class="sell-btn" onclick="sellFish('lake')">
+                            <span class="btn-icon">🏔️</span>
+                            <span class="btn-text">Продай Езерни/Язовирни Риби</span>
+                        </button>
+                        <button class="sell-btn" onclick="sellFish('sea')">
+                            <span class="btn-icon">🌊</span>
+                            <span class="btn-text">Продай Морски Риби</span>
+                        </button>
+                        <button class="sell-btn" onclick="sellFish('ocean')">
+                            <span class="btn-icon">🌊</span>
+                            <span class="btn-text">Продай Океански Риби</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Tab -->
+                <div id="stats-tab" class="tab-pane">
+                    <div class="category-stats" id="category-stats"></div>
+                </div>
+
+                <!-- Leaderboard Tab -->
+                <div id="leaderboard-tab" class="tab-pane">
+                    <div class="leaderboard-nav">
+                        <button class="lb-btn active" data-lb="total">Общо Улови</button>
+                        <button class="lb-btn" data-lb="biggest">Най-Големи Риби</button>
+                        <button class="lb-btn" data-lb="records">Световни Рекорди</button>
+                    </div>
+                    <div id="leaderboard-content"></div>
+                </div>
+
+                <!-- Collection Tab -->
+                <div id="collection-tab" class="tab-pane">
+                    <div class="collection-grid" id="fish-collection"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="fishing_ui.js"></script>
+</body>
+</html>

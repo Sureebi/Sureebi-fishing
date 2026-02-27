@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: red;
+            color: white;
+            font-size: 50px;
+            text-align: center;
+            padding-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TEST HTML LOADED!</h1>
+    <script>
+        console.log('===== TEST HTML LOADED =====');
+        
+        window.addEventListener('message', (event) => {
+            console.log('TEST: Message received', event.data);
+            if (event.data.action === 'openUI') {
+                document.body.style.background = 'green';
+            }
+        });
+    </script>
+</body>
+</html>
